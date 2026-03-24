@@ -59,6 +59,7 @@ Ver tambien:
 - `docs/Proyecto/06-decisiones-tecnicas.md`
 - `docs/Proyecto/07-contrato-async.md`
 - `docs/Proyecto/08-fixtures-generales.md`
+- `docs/Proyecto/10-motor-optimizacion.md`
 - `docs/Proyecto/99-handoff-nueva-sesion.md`
 
 ## Proximo foco de trabajo

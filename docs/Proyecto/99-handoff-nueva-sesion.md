@@ -23,6 +23,7 @@ Antes de proponer nada, revisa estos documentos del repo:
 - `docs/Proyecto/06-decisiones-tecnicas.md`
 - `docs/Proyecto/07-contrato-async.md`
 - `docs/Proyecto/08-fixtures-generales.md`
+- `docs/Proyecto/10-motor-optimizacion.md`
 
 Contexto importante:
 
@@ -37,13 +38,21 @@ Contexto importante:
 Despues de leer eso, quiero que continúes con: [ACA PONES LA TAREA]
 ```
 
+## Decisiones tomadas (no reabrir)
+
+- el algoritmo de optimizacion es guillotina implementado en casa, sin libreria externa (ver `10-motor-optimizacion.md`)
+- los resultados deben ser optimos, no bit-a-bit identicos al sistema anterior
+- `planilla_vid` se devuelve como string vacio hasta que se documente su formato
+- generacion de CNC diferida: primero PDF, CNC en iteracion posterior
+
 ## Tareas sugeridas para continuar
 
 - redactar `docs/Proyecto/09-errores-y-estados.md`
 - materializar fixtures reales en el repo a partir del ejemplo actual
 - proponer la estructura inicial del proyecto `.NET`
-- comenzar la implementacion de la API
+- comenzar la implementacion de la API skeleton (Etapa 3 del roadmap)
 - definir el esquema inicial de base de datos para tenants, api keys y jobs
+- consultar con el sistema integrador si usa `planilla_vid` y como
 
 ## Recomendacion de uso
 

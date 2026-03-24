@@ -112,14 +112,54 @@ Objetivo:
 
 - resolver funcionalmente el calculo de corte respetando el contrato actual
 
+El motor se implementa como un algoritmo guillotina propio. Ver decision y diseno completo en `docs/Proyecto/10-motor-optimizacion.md`.
+
+#### Etapa 4.1 Modelo interno de corte
+
 Tareas:
 
-- modelar placas, piezas, sobrantes y tapacantos
-- implementar reglas de rotacion, veta y refilados
-- implementar calculo de desperdicio de sierra
-- implementar agrupacion de patrones de corte
-- implementar calculo de metricas globales
-- generar `planilla`, `planos_corte`, `sobrantes` y `tapacantos`
+- definir clase `PlateLayout` que representa el arbol de cortes de una placa
+- definir clase `CutNode` con tipo (pieza, sobrante, corte), dimensiones y posicion
+- definir clase `OptimizationResult` con patrones y metricas
+- separar el modelo interno del contrato de salida
+
+#### Etapa 4.2 Algoritmo guillotina base
+
+Tareas:
+
+- implementar recursion guillotina con `tipo_cortes` (vertical, horizontal, combinado)
+- implementar manejo de veta: restriccion de rotacion segun material
+- implementar ajuste de dimensiones efectivas por tapacantos antes de optimizar
+- implementar calculo de desperdicio de sierra en cada corte
+
+#### Etapa 4.3 Optimizacion sobre el base
+
+Tareas:
+
+- implementar `fases`: multiples pasadas con distintas ordenaciones de piezas, conservar mejor resultado
+- implementar `modo_full`: correr 8 combinaciones de parametros y conservar el de mayor yield
+- implementar `op_frac`: logica de fraccionamiento de la ultima placa incompleta
+- implementar `unificar_areas`: fusion de sobrantes separados por corte si produce sobrante mayor reutilizable
+- implementar `precorte`: corte previo cercano a mitad de placa si esta habilitado
+
+#### Etapa 4.4 Post-procesamiento y consolidacion
+
+Tareas:
+
+- detectar y consolidar patrones de corte equivalentes en `planos_corte`
+- calcular metricas globales: `m2_utilizados`, `m2_cortados`, `m2_sobrantes`, `ptje_aprov`, `cant_placas`
+- identificar sobrantes reutilizables segun `min_base`, `min_altura`, `min_sup`
+- calcular consumo de tapacantos por tipo (`ml`, `pegado`) segun configuracion de desperdicio
+- mantener el arbol de cortes disponible para futura serializacion de `planilla_vid`
+
+#### Etapa 4.5 Serializacion del response
+
+Tareas:
+
+- mapear modelo interno al contrato de salida JSON
+- producir `planilla`, `planos_corte`, `sobrantes`, `tapacantos`, `placas_usadas`
+- incluir `planilla_vid` como string vacio hasta que se documente su formato
+- validar coherencia de totales antes de serializar
 
 Entregables:
 
@@ -129,6 +169,7 @@ Entregables:
 Criterio de salida:
 
 - la API produce resultados estructuralmente compatibles y funcionalmente plausibles
+- el yield es razonable y los totales son coherentes internamente
 
 ### Etapa 5. Generacion de entregables
 

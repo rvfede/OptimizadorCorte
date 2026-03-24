@@ -285,7 +285,54 @@ Desde la primera fase, la API deberia registrar:
 - resultado final (`success`, `validation_error`, `processing_error`)
 - artefactos generados
 
-## 10. Decisiones que se posponen
+## 10. Motor de optimizacion
+
+### 10.1 Decision: algoritmo guillotina implementado en casa
+
+Decision tomada: implementar el algoritmo de corte guillotina directamente, sin usar una libreria externa de bin-packing o un solver generico.
+
+Motivos:
+
+- el contrato de salida es muy especifico: requiere `planos_corte`, coordenadas de piezas, sobrantes, patrones consolidados y metricas propias
+- ninguna libreria externa produce este output en el formato requerido; habria que traducir igual
+- los parametros de configuracion (`fases`, `tipo_cortes`, `modo_full`, `op_frac`, `unificar_areas`) son propios del dominio y no modelables directamente en solvers genericos
+- implementar el algoritmo da acceso al arbol de cortes interno, que probablemente sea necesario para serializar `planilla_vid` cuando se entienda su formato
+- el algoritmo guillotina esta bien documentado academicamente y es ingenieria conocida, no investigacion
+
+Ver diseno completo en `docs/Proyecto/10-motor-optimizacion.md`.
+
+### 10.2 Criterio de equivalencia de resultados
+
+Decision tomada: los resultados de la nueva API deben ser **funcionalmente optimos**, no bit-a-bit identicos a los de la API actual.
+
+Implicancias:
+
+- el yield y las metricas pueden diferir levemente entre implementaciones siempre que el resultado sea plausiblemente optimo
+- la validacion de compatibilidad debe comparar estructura y coherencia de los campos, no valores exactos de optimizacion
+- los fixtures de prueba deben usarse para verificar integridad del contrato (tipos, campos, relaciones) y razonabilidad del resultado (yield > 0, totales coherentes), no para igualar numeros exactos
+
+### 10.3 Manejo de `planilla_vid`
+
+Decision tomada: tratar `planilla_vid` como campo opaco hasta que se documente su formato.
+
+Estrategia operativa:
+
+- el campo debe estar presente en el response (el contrato lo incluye)
+- mientras no se conozca el formato, se puede devolver un string vacio o un valor nulo con documentacion explicita del gap
+- el motor debe mantener el arbol de cortes interno disponible para serializar este campo en el futuro
+- cuando se consigan mas ejemplos o se documente el formato, se puede atacar sin tocar el resto del sistema
+
+### 10.4 Artefactos: CNC diferido, PDF primero
+
+Decision tomada: la generacion de archivos CNC queda diferida a una iteracion posterior. El PDF tiene prioridad.
+
+Motivos:
+
+- ya existen ejemplos de PDF, lo que permite implementar y validar la generacion
+- no hay ejemplos de CNC disponibles aun
+- el campo `url_cnc` y `url_aux_cnc` pueden devolver null o string vacio en las primeras iteraciones sin romper el contrato con el sistema integrador actual
+
+## 11. Decisiones que se posponen
 
 Quedan deliberadamente pospuestas:
 
@@ -294,17 +341,19 @@ Quedan deliberadamente pospuestas:
 - rate limiting sofisticado por empresa cliente
 - auth mas compleja que API key
 - estrategia final de versionado publico del contrato
-- mecanismo final de interpretacion de `planilla_vid`
+- formato e implementacion completa de `planilla_vid`
+- generacion de archivos CNC
 
-## 11. Riesgos y observaciones
+## 12. Riesgos y observaciones
 
 - si las 4 empresas cliente o sus sistemas integradores dependen fuertemente del comportamiento sincrono, la transicion a async visible externamente puede requerir una etapa intermedia
 - la compatibilidad de auth debe validarse contra cada empresa cliente y su sistema integrador real
 - la retencion de payloads completos requiere definir politica de limpieza desde el inicio
 - la generacion de PDFs y archivos CNC puede mover el cuello de botella fuera del optimizador puro
 - sostener sync como modo principal puede degradar la arquitectura futura; por eso debe evitarse como decision estructural
+- `planilla_vid` puede ser un bloqueante de aceptacion si el sistema integrador lo parsea y renderiza activamente
 
-## 12. Proximo paso sugerido
+## 13. Proximo paso sugerido
 
 El siguiente paso util despues de este documento es:
 
@@ -312,6 +361,7 @@ El siguiente paso util despues de este documento es:
 - diseñar el contrato asincrono objetivo
 - decidir si el modo sync sera temporal, optativo o limitado por SLA
 - bajar la especificacion de errores y estados de job
+- consultar con el sistema integrador real si usa `planilla_vid` y como
 
 
 
