@@ -1,5 +1,5 @@
-﻿# Handoff Para Nueva Sesion
-codex resume 019d1c41-4bd9-7661-8351-09fe3a8c542e
+# Handoff Para Nueva Sesion
+
 ## Objetivo
 
 Este documento sirve como punto de arranque para continuar el trabajo en una nueva sesion sin perder el contexto del proyecto.
@@ -44,15 +44,39 @@ Despues de leer eso, quiero que continúes con: [ACA PONES LA TAREA]
 - los resultados deben ser optimos, no bit-a-bit identicos al sistema anterior
 - `planilla_vid` se devuelve como string vacio hasta que se documente su formato
 - generacion de CNC diferida: primero PDF, CNC en iteracion posterior
+- infra elegida: Google Cloud Run + Supabase Postgres + Supabase Storage + GitHub Actions + Docker
 
-## Tareas sugeridas para continuar
+## Estado actual del proyecto (sesion 2025-03-24)
 
+Lo que se hizo en esta sesion:
+
+- revision del enfoque tecnico y feedback general
+- decision sobre el motor: algoritmo guillotina propio (ver `06-decisiones-tecnicas.md` seccion 10)
+- creacion de `10-motor-optimizacion.md` con diseno completo del algoritmo
+- actualizacion de `04-roadmap-tecnico.md` con Etapa 4 expandida en sub-etapas
+- actualizacion de `06-decisiones-tecnicas.md` con nuevas decisiones formalizadas
+- commit y push a main (commit aa7924d)
+
+Lo que quedo pendiente para la proxima sesion:
+
+- definir y configurar la infra (arrancar por esto)
 - redactar `docs/Proyecto/09-errores-y-estados.md`
-- materializar fixtures reales en el repo a partir del ejemplo actual
-- proponer la estructura inicial del proyecto `.NET`
-- comenzar la implementacion de la API skeleton (Etapa 3 del roadmap)
-- definir el esquema inicial de base de datos para tenants, api keys y jobs
+- materializar fixtures reales en el repo
+- proponer estructura inicial del proyecto `.NET`
+- comenzar Etapa 3 del roadmap (API skeleton)
+- definir esquema inicial de base de datos
 - consultar con el sistema integrador si usa `planilla_vid` y como
+
+## Proximo foco: infraestructura
+
+La proxima sesion deberia arrancar definiendo la infra. Las preguntas abiertas son:
+
+1. ¿Ya existe un proyecto en Google Cloud Platform o hay que crearlo desde cero?
+2. ¿Ya existe cuenta en Supabase o hay que crearla?
+3. ¿Se quiere CI/CD desde el primer dia o primero levantar la infra base?
+
+Lo que Claude puede hacer: escribir Dockerfile, GitHub Actions workflows, scripts gcloud/Terraform, schema SQL de Supabase.
+Lo que requiere accion manual del usuario: login a GCP (`gcloud auth login`), crear proyecto GCP, habilitar APIs, crear proyecto Supabase, configurar secrets en GitHub.
 
 ## Recomendacion de uso
 
