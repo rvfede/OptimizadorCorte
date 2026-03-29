@@ -1,4 +1,4 @@
-﻿# Contrato API
+# Contrato API
 
 ## 1. Objetivo del documento
 
@@ -8,8 +8,8 @@ Documentar la estructura actual del contrato de entrada y salida que la nueva AP
 
 Este documento se basa en:
 
-- `docs/LEPTON API/Ejemplo.json`
-- `docs/LEPTON API/Resultado.json`
+- `docs/LEPTON API/Ejemplo_Lepton/Ejemplo_request.json`
+- `docs/LEPTON API/Ejemplo_Lepton/Resultado_response.json`
 
 Cuando los PDFs sean convertidos a Markdown, este documento debe validarse y ajustarse contra esa fuente funcional adicional.
 
@@ -31,7 +31,7 @@ En este documento se distinguen tres conceptos:
 
 - empresa cliente: empresa autenticada por API key que usa el servicio
 - sistema integrador: software que llama a la API en nombre de la empresa cliente
-- cliente final: valor de pedidos.cliente dentro del contrato funcional
+- `pedidos.cliente`: identificador observado del tenant o empresa cliente en trafico real; su semantica historica exacta queda pendiente
 ## 4. Contrato de entrada
 
 ### 4.1 Nodo raiz
@@ -76,7 +76,7 @@ Nota: aunque semanticamente representa un pedido, el nombre del nodo actual es `
 
 | Campo | Tipo observado | Descripcion funcional |
 | --- | --- | --- |
-| `cliente` | string | Nombre del cliente final del pedido. |
+| `cliente` | string | Identificador observado del tenant o empresa cliente en trafico real. |
 | `archivo` | string | Identificador o nombre del archivo/pedido. |
 | `obs1` | string | Observacion libre 1. |
 | `obs2` | string | Observacion libre 2. |
@@ -364,3 +364,37 @@ Queda por validar contra la documentacion PDF convertida a Markdown:
 - reglas de negocio asociadas a cada opcion del optimizador
 - semantica exacta de `planilla_vid`
 
+
+
+
+## 7. Actualizacion 2026-03-29 con evidencia real y pruebas live
+
+Nuevas fuentes utilizadas:
+
+- `docs/LEPTON API/Nueva Doc 29-3/api_test.md`
+- `docs/LEPTON API/Nueva Doc 29-3/OPTIMIZACIONES.txt`
+- `docs/LEPTON API/Nueva Doc 29-3/OPTIMIZACIONES (1).txt`
+- pruebas reales contra `http://apidev.optimizadoronline.com/optimizar2`
+
+Hallazgos de entrada:
+
+- el endpoint observado usa header `X-User-Id`
+- en la evidencia real, `pedidos.cliente = mocona`, por lo que no conviene seguir documentandolo como cliente final
+- `pedidos.archivo` no debe asumirse unico; hay repeticiones observadas
+- las piezas pueden venir sin todos los flags `arrN/abaN/derN/izqN` cuando no aplican
+- `tapacantos[]` incluye no solo cantos fisicos sino tambien items de tablero, corte, etiquetado o pegado
+- en la muestra observada, `tapacantos[].espesor` llega en `0` aun cuando la descripcion textual menciona espesores como `0.45mm`, `1mm` o `2mm`
+
+Hallazgos de salida confirmados por pruebas live:
+
+- `planilla` incluye tambien `fracc_ultima_placa`
+- `planilla_vid` se devuelve con contenido no vacio
+- `planilla.tapacantos` no es un espejo directo del request; en algunos casos devuelve codigos genericos como `MEL`, `PVC`, `AUX` y `trN`
+- `url_planos`, `url_labels`, `url_cnc` y `url_aux_cnc` se observaron con valores reales en developer
+- las extensiones observadas para artefactos fueron `.pdf`, `_labels.pdf`, `.saw` y `.PTX`
+
+Observaciones abiertas derivadas de pruebas live:
+
+- `m2_utilizados` parece reportarse con base en placa nominal y no necesariamente en placa refilada
+- las piezas observadas en `piezas_x_placa` conservaron medidas nominales en casos con tapacantos activos
+- la semantica exacta de `planilla_vid` ya tiene evidencia suficiente para comenzar ingenieria inversa especifica

@@ -1,4 +1,4 @@
-﻿# Contrato Async
+# Contrato Async
 
 ## 1. Objetivo del documento
 
@@ -30,7 +30,7 @@ En este documento:
 
 - empresa cliente = empresa vendedora de materiales que posee la API key
 - sistema integrador = software de gestion que llama a la API
-- cliente final = valor de pedidos.cliente dentro del payload funcional
+- `pedidos.cliente` = identificador observado del tenant o empresa cliente en trafico real; su semantica historica exacta queda pendiente
 ## 3. Estrategias posibles de exposicion
 
 Se consideran dos alternativas compatibles con esta regla:
@@ -263,7 +263,7 @@ Propuesta:
 3. si el job termina, devuelve el contrato funcional final
 4. si no termina, la estrategia dependera de compatibilidad e implementacion
 
-### 9.2 Regla de diseño
+### 9.2 Regla de dise�o
 
 No deben existir dos motores distintos:
 
@@ -351,6 +351,7 @@ El siguiente documento util deberia ser uno de estos dos:
 - `08-fixtures-generales.md`
 
 Si hay que priorizar uno, conviene empezar por `08-fixtures-generales.md` para validar el comportamiento comun esperado y luego incorporar variantes reales si aparecen necesidades concretas.
+
 
 
 

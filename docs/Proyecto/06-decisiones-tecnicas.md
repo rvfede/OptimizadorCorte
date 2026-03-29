@@ -1,4 +1,4 @@
-ï»¿# Decisiones Tecnicas
+# Decisiones Tecnicas
 
 ## 1. Objetivo del documento
 
@@ -10,7 +10,8 @@ Estado actual del proyecto:
 
 - primera etapa sin frontend
 - el producto a entregar es una API consumida por sistemas externos
-- objetivo inmediato: reemplazar la API actual en 4 empresas cliente con sus sistemas integradores ya conectados`r`n- hoy existe 1 unico sistema integrador para esas 4 empresas cliente
+- objetivo inmediato: reemplazar la API actual en 4 empresas cliente con sus sistemas integradores ya conectados
+- hoy existe 1 unico sistema integrador para esas 4 empresas cliente
 - la autenticacion sera por API key
 - se prioriza conservar el comportamiento y contrato actuales mientras no exista una razon fuerte para cambiarlo
 - se desea trazabilidad completa al inicio, pero con retencion temporal de payloads
@@ -22,7 +23,7 @@ Para evitar ambiguedades en el proyecto se recomienda usar estos terminos:
 
 - empresa cliente: empresa vendedora de materiales que contrata o utiliza el optimizador y posee una API key propia
 - sistema integrador: software de gestion del vendedor que consume la API en nombre de la empresa cliente
-- cliente final: cliente comercial del vendedor, representado por el campo pedidos.cliente en el contrato funcional
+- cliente final: cliente comercial del vendedor; la evidencia real observada hasta 2026-03-29 no lo mapea de forma confiable a `pedidos.cliente`
 
 Esta distincion es importante porque el campo cliente ya existe dentro del pedido y no debe confundirse con la identidad autenticada de la empresa que consume la API.
 ## 3. Decision de arquitectura principal
@@ -43,7 +44,7 @@ Interpretacion tecnica:
 - toda optimizacion se modela internamente como un job
 - el producto puede exponer ambos modos de consumo 
 - la interfaz asincrona debe ser el contrato preferido hacia futuro
-- la interfaz sincrona no debe condicionar el diseÃ±o central del sistema
+- la interfaz sincrona no debe condicionar el diseño central del sistema
 - si algun consumidor necesita sync al inicio, debe resolverse como adaptador y no como base del producto
 
 ### 3.2 Compatibilidad externa
@@ -163,8 +164,8 @@ Flujo sugerido:
 
 Decision importante:
 
-- no se debe diseÃ±ar el sistema alrededor del modo sync
-- no conviene optimizar la arquitectura para sostener indefinidamente clientes bloqueantes si eso degrada el diseÃ±o global
+- no se debe diseñar el sistema alrededor del modo sync
+- no conviene optimizar la arquitectura para sostener indefinidamente clientes bloqueantes si eso degrada el diseño global
 - si un cliente puede migrar a async con beneficio real, deberia promoverse esa migracion
 - en la practica, el sistema podra operar en ambos modos, pero las nuevas implementaciones deberian orientarse a async por defecto
 
@@ -217,7 +218,7 @@ La key no deberia guardarse en texto plano.
 Campos sugeridos:
 
 - `id`
-- `client_id`
+- `tenant_id`
 - `key_prefix`
 - `key_hash`
 - `status`
@@ -233,7 +234,7 @@ Deberia modelar el ciclo completo del proceso.
 Campos sugeridos:
 
 - `id`
-- `client_id`
+- `tenant_id`
 - `mode` (`sync` o `async`)
 - `status`
 - `request_received_at`
@@ -299,6 +300,14 @@ Motivos:
 - implementar el algoritmo da acceso al arbol de cortes interno, que probablemente sea necesario para serializar `planilla_vid` cuando se entienda su formato
 - el algoritmo guillotina esta bien documentado academicamente y es ingenieria conocida, no investigacion
 
+Fundamento de la decision:
+
+- el riesgo principal del proyecto no es solo ubicar piezas sino reproducir correctamente el contrato funcional que ya consume el sistema integrador
+- una libreria externa podria ayudar a resolver packing, pero no produciria por si sola `planos_corte`, patrones consolidados, sobrantes reutilizables ni las metricas especificas del dominio
+- para integrar una libreria igual habria que construir una capa propia amplia alrededor del solver y reconstruir el arbol de cortes necesario para explicar el resultado
+- esa adaptacion agregaria complejidad, restaria control sobre la logica y haria mas dificil depurar diferencias contra fixtures e integraciones reales
+- como el problema requiere corte guillotina con reglas operativas concretas, conviene mas una implementacion propia simple, verificable y extensible que depender de una libreria generalista
+
 Ver diseno completo en `docs/Proyecto/10-motor-optimizacion.md`.
 
 ### 10.2 Criterio de equivalencia de resultados
@@ -318,7 +327,7 @@ Decision tomada: tratar `planilla_vid` como campo opaco hasta que se documente s
 Estrategia operativa:
 
 - el campo debe estar presente en el response (el contrato lo incluye)
-- mientras no se conozca el formato, se puede devolver un string vacio o un valor nulo con documentacion explicita del gap
+- mientras no se conozca completamente el formato, se tratara como campo opaco; como ya existen ejemplos reales no vacios, la prioridad pasa por capturarlos y analizarlos
 - el motor debe mantener el arbol de cortes interno disponible para serializar este campo en el futuro
 - cuando se consigan mas ejemplos o se documente el formato, se puede atacar sin tocar el resto del sistema
 
@@ -329,7 +338,7 @@ Decision tomada: la generacion de archivos CNC queda diferida a una iteracion po
 Motivos:
 
 - ya existen ejemplos de PDF, lo que permite implementar y validar la generacion
-- no hay ejemplos de CNC disponibles aun
+- ya existe evidencia real de URLs CNC y auxiliares en developer, aunque la implementacion propia pueda seguir diferida
 - el campo `url_cnc` y `url_aux_cnc` pueden devolver null o string vacio en las primeras iteraciones sin romper el contrato con el sistema integrador actual
 
 ## 11. Decisiones que se posponen
@@ -358,12 +367,50 @@ Quedan deliberadamente pospuestas:
 El siguiente paso util despues de este documento es:
 
 - definir fixtures generales representativos del uso comun
-- diseÃ±ar el contrato asincrono objetivo
+- diseñar el contrato asincrono objetivo
 - decidir si el modo sync sera temporal, optativo o limitado por SLA
 - bajar la especificacion de errores y estados de job
 - consultar con el sistema integrador real si usa `planilla_vid` y como
 
 
 
+
+
+
+
+## 14. Actualizacion 2026-03-29 por evidencia real observada
+
+### 14.1 `planilla_vid` deja de tratarse como string vacio por defecto en la referencia actual
+
+La decision de mantener `planilla_vid` como campo opaco sigue vigente.
+
+Lo que cambia con la nueva evidencia es esto:
+
+- ya existen responses reales con `planilla_vid` no vacio
+- por lo tanto, la referencia actual observada del sistema ya no es `string vacio`
+
+Nueva estrategia recomendada:
+
+- mantener `planilla_vid` como campo opaco mientras no se entienda completamente
+- pero priorizar capturar fixtures reales y estudiar su serializacion
+- si la nueva API necesitara una etapa intermedia, documentarla explicitamente como gap temporal y no como reflejo fiel del comportamiento actual
+
+### 14.2 Artefactos CNC y auxiliares ya tienen evidencia real de salida
+
+La decision de diferir la implementacion propia de CNC sigue siendo valida para el roadmap de la nueva API.
+
+Lo que cambia es la evidencia observada del sistema actual:
+
+- en developer se observaron `url_cnc` y `url_aux_cnc` con valores reales
+- ya no corresponde afirmar que no hay ejemplos de CNC disponibles
+
+Nueva conclusion operativa:
+
+- la nueva API puede seguir priorizando PDF primero
+- pero ya existe evidencia suficiente para modelar contractualmente los artefactos CNC como parte real del sistema actual
+
+### 14.3 `pedidos.cliente`
+
+La evidencia real observada hasta 2026-03-29 indica que `pedidos.cliente` funciona como identificador del tenant o empresa cliente, no como cliente final comercial.
 
 

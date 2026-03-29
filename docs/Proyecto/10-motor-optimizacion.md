@@ -29,6 +29,13 @@ Motivos:
 - tener el arbol de cortes interno disponible es necesario para poder serializar `planilla_vid` cuando se entienda su formato
 - el algoritmo guillotina esta bien documentado y es implementable con esfuerzo acotado
 
+Fundamento practico:
+
+- el proyecto no necesita solo optimizar aprovechamiento; tambien debe explicar el corte en el formato exacto que exige el contrato
+- una libreria externa podria servir como heuristica de ubicacion, pero obligaria igual a reconstruir cortes, sobrantes y patrones en una capa propia
+- esa traduccion agregaria complejidad, ocultaria decisiones internas del solver y haria mas dificil depurar diferencias frente al sistema actual
+- una implementacion propia mantiene control total sobre la secuencia de cortes, facilita trazabilidad y deja una base directa para pruebas por fixtures
+
 ## 4. Algoritmo guillotina
 
 ### 4.1 Principio de funcionamiento
@@ -138,7 +145,7 @@ descuento_lado = espesor_tapacanto_lado + refilado_tapacanto
 
 Si un lado no tiene tapacanto, su descuento es 0.
 
-El algoritmo opera sobre `base_corte` x `altura_corte`. El contrato de salida reporta los campos en la dimension de corte.
+El algoritmo opera sobre `base_corte` x `altura_corte`. La evidencia live observada hasta 2026-03-29 sugiere que el contrato de salida puede reportar dimensiones nominales de pieza, por lo que esta serializacion debe tratarse como regla abierta hasta cerrar mas fixtures reales.
 
 ### 5.3 Rotacion permitida
 
@@ -189,7 +196,7 @@ donde desperdicio_fijo = cant_piezas_con_ese_tapacanto * desp_tapacantos
 ```
 cant_placas            = sum(planos_corte[].cant)
 cant_piezas_cortadas   = sum de todas las piezas del pedido
-m2_utilizados          = cant_placas * base_util * altura_util / 1.000.000
+m2_utilizados          = metrica de salida compatible; la evidencia live observada sugiere usar placa nominal y no necesariamente placa util refilada
 m2_cortados            = suma de area de todas las piezas cortadas
 m2_sobrantes           = m2_utilizados - m2_cortados
 ptje_aprov             = m2_cortados / m2_utilizados * 100
@@ -239,17 +246,17 @@ El campo `planilla_vid` aparece en el response como un string serializado con in
 Estrategia de implementacion:
 
 - el motor debe mantener el arbol de cortes (`CutNode`) disponible en el resultado interno
-- en el response, `planilla_vid` se devuelve como string vacio hasta que se documente el formato
+- en el response, `planilla_vid` debe preservarse segun el comportamiento observado; ya existen ejemplos reales no vacios para analizar
 - cuando se obtengan mas ejemplos o se documente el campo, la serializacion se puede implementar sin tocar el algoritmo
 
-Este campo NO debe eliminarse del response ni ignorarse en el contrato. Debe estar presente aunque vacio.
+Este campo NO debe eliminarse del response ni ignorarse en el contrato. Debe estar presente aunque su serializacion siga tratandose como campo opaco mientras se termina la ingenieria inversa.
 
 ## 9. Criterio de calidad del resultado
 
 El resultado se considera valido si:
 
 - la estructura del response es compatible con el contrato
-- `m2_utilizados + m2_sobrantes == m2_cortados` (con tolerancia de redondeo)
+- `m2_cortados + m2_sobrantes == m2_utilizados` (con tolerancia de redondeo)
 - `sum(planos_corte[].cant) == cant_placas`
 - `yield > 0` y `yield <= 100`
 - ninguna pieza supera las dimensiones de la placa util
@@ -268,3 +275,48 @@ El motor debe diseñarse para ser iterable. La secuencia de mejora esperada es:
 5. implementar `precorte`
 6. serializar `planilla_vid` cuando se entienda el formato
 7. optimizaciones de performance si el tiempo de computo es un problema real
+
+## 11. Actualizacion 2026-03-29 por pruebas live contra developer
+
+### 11.1 `planilla_vid`
+
+La evidencia live confirma que `planilla_vid` se devuelve con contenido real en la implementacion observada.
+
+Implicancia para el motor:
+
+- ya no corresponde usar como referencia del sistema actual la idea de `planilla_vid` vacio
+- la nueva API puede seguir tratandolo como serializacion pendiente si todavia no se implementa
+- pero debe documentarse como gap temporal respecto del comportamiento actual, no como comportamiento observado del sistema existente
+
+### 11.2 Metricas globales
+
+Las pruebas live sugieren que `m2_utilizados` se reporta con la placa nominal completa.
+
+Implicancia para el motor:
+
+- separar claramente metrica interna de optimizacion sobre placa util
+- de metrica serializada compatible con el contrato actual observado
+
+### 11.3 Dimensiones reportadas de pieza
+
+Las pruebas live con tapacantos activos no confirmaron descuento de dimensiones en `piezas_x_placa`.
+
+Implicancia:
+
+- el motor debe separar dimension de corte interna de dimension serializada si fuera necesario
+- no conviene fijar aun una unica representacion hasta tener mas fixtures reales
+
+### 11.4 Tapacantos
+
+Las pruebas live sugieren que:
+
+- `desp_tapacantos` usa una unidad muy pequena por lado
+- `planilla.tapacantos` tiene estructura propia y no siempre refleja el input de manera directa
+
+Implicancia:
+
+- conviene modelar una capa de serializacion especifica de tapacantos separada de la estructura de entrada
+
+
+
+

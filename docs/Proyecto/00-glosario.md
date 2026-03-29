@@ -1,4 +1,4 @@
-﻿# Glosario
+# Glosario
 
 ## Objetivo
 
@@ -33,7 +33,22 @@ En el estado actual del proyecto:
 
 ### Cliente final
 
-Cliente comercial de la empresa cliente. En el contrato funcional actual corresponde al campo `pedidos.cliente`.
+Cliente comercial de la empresa cliente.
+
+Importante:
+
+- con la evidencia real observada hasta 2026-03-29 no puede afirmarse que este concepto corresponda al campo `pedidos.cliente`
+- en los requests reales capturados, `pedidos.cliente` toma el valor `mocona`, que coincide con el tenant o empresa cliente autenticada
+
+### `pedidos.cliente`
+
+Campo del contrato funcional cuyo significado historico exacto sigue abierto.
+
+Segun la evidencia real observada hasta 2026-03-29:
+
+- funciona como identificador del tenant o empresa cliente
+- no se comporta como identificador de cliente final comercial
+- conviene preservarlo tal como llega por compatibilidad, sin reinterpretarlo internamente hasta tener mas evidencia
 
 ### Tenant
 
@@ -112,7 +127,7 @@ Ejemplos:
 
 Cuando en la documentacion aparezca el termino `cliente`, debe verificarse el contexto:
 
-- si aparece como `pedidos.cliente`, significa `cliente final`
+- si aparece como `pedidos.cliente`, debe interpretarse como campo opaco del contrato y no como cliente final por defecto
 - si aparece en arquitectura, auth o multi-tenancy, normalmente significa `empresa cliente`
 - si se habla del software que llama a la API, el termino correcto es `sistema integrador`
-
+- si se habla del comprador comercial del vendedor, el termino correcto es `cliente final`

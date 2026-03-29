@@ -1,4 +1,4 @@
-﻿# Proyecto
+# Proyecto
 
 ## Objetivo
 
@@ -42,7 +42,7 @@ En la primera etapa del proyecto:
 
 - empresa cliente: empresa vendedora de materiales autenticada por API key
 - sistema integrador: software de gestion que consume la API
-- cliente final: valor de `pedidos.cliente` dentro del pedido
+- `pedidos.cliente`: identificador observado del tenant o empresa cliente en trafico real; su semantica historica exacta queda pendiente
 
 Ver tambien:
 
@@ -60,6 +60,7 @@ Ver tambien:
 - `docs/Proyecto/07-contrato-async.md`
 - `docs/Proyecto/08-fixtures-generales.md`
 - `docs/Proyecto/10-motor-optimizacion.md`
+- `docs/Proyecto/11-impacto-nueva-documentacion-2026-03-29.md`
 - `docs/Proyecto/99-handoff-nueva-sesion.md`
 
 ## Proximo foco de trabajo
@@ -70,3 +71,4 @@ Los siguientes pasos recomendados son:
 2. usar `03-reglas-de-optimizacion.md` para cerrar reglas pendientes
 3. convertir `05-casos-de-prueba.md` en fixtures reales dentro del repo
 4. definir fixtures generales y cerrar el contrato operativo async
+

@@ -1,4 +1,4 @@
-﻿# Requerimientos Funcionales
+# Requerimientos Funcionales
 
 ## 1. Objetivo
 
@@ -40,7 +40,7 @@ Para evitar confusion entre identidades distintas del negocio:
 
 - empresa cliente: empresa vendedora de materiales autenticada por API key
 - sistema integrador: software de gestion que consume la API
-- cliente final: valor del campo pedidos.cliente dentro del pedido
+- `pedidos.cliente`: identificador observado del tenant o empresa cliente en trafico real; su semantica historica exacta queda pendiente
 ## 4. Requerimientos funcionales del input
 
 La API debe aceptar un JSON con la misma estructura general observada en el contrato actual.
@@ -155,8 +155,8 @@ Cualquier mejora o extension debe cumplir una de estas condiciones:
 
 La base documental inicial para este contrato es:
 
-- `docs/LEPTON API/Ejemplo.json`
-- `docs/LEPTON API/Resultado.json`
+- `docs/LEPTON API/Ejemplo_Lepton/Ejemplo_request.json`
+- `docs/LEPTON API/Ejemplo_Lepton/Resultado_response.json`
 - documentacion PDF asociada en `docs/LEPTON API`
 
 ## 11. Proximo paso
@@ -169,5 +169,6 @@ El siguiente documento debe definir el contrato exacto de entrada y salida campo
 - obligatoriedad
 - significado funcional
 - observaciones de compatibilidad
+
 
 

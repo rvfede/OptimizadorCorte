@@ -1,4 +1,4 @@
-﻿# Roadmap Tecnico
+# Roadmap Tecnico
 
 ## 1. Objetivo del roadmap
 
@@ -158,7 +158,7 @@ Tareas:
 
 - mapear modelo interno al contrato de salida JSON
 - producir `planilla`, `planos_corte`, `sobrantes`, `tapacantos`, `placas_usadas`
-- incluir `planilla_vid` como string vacio hasta que se documente su formato
+- incluir `planilla_vid` preservando el comportamiento observado; mientras no se entienda su formato, capturar y versionar ejemplos reales para ingenieria inversa
 - validar coherencia de totales antes de serializar
 
 Entregables:
@@ -253,5 +253,6 @@ La estrategia recomendada es incremental:
 - `03-reglas-de-optimizacion.md`
 - `05-casos-de-prueba.md`
 - `06-decisiones-tecnicas.md`
+
 
 

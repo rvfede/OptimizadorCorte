@@ -301,3 +301,77 @@ Ese documento deberia listar casos minimos para validar:
 - repeticion de patrones de corte
 - coherencia de totales del response
 
+
+## 10. Actualizacion 2026-03-29 a partir de requests reales y pruebas live
+
+### 10.1 Semantica observada de `pedidos.cliente`
+
+La evidencia real observada contradice la interpretacion previa de `pedidos.cliente` como cliente final comercial.
+
+En los requests reales capturados:
+
+- `pedidos.cliente = mocona`
+- el mismo valor coincide con el tenant o empresa cliente observado en auth
+
+Hipotesis de trabajo recomendada:
+
+- tratar `pedidos.cliente` como campo opaco de compatibilidad
+- no reinterpretarlo como cliente final sin evidencia adicional
+
+### 10.2 `m2_utilizados` parece usar area nominal de placa
+
+En pruebas reales contra developer se observo que `m2_utilizados` coincide con:
+
+```text
+material.base * material.altura / 1.000.000
+```
+
+mas que con el area util refilada.
+
+Hipotesis de trabajo recomendada:
+
+- el motor podria optimizar sobre placa util refilada
+- pero el response compatible deberia evaluar si debe reportar metricas usando placa nominal
+
+### 10.3 Las dimensiones de pieza en el response no confirmaron descuento por tapacanto
+
+En los casos live probados con tapacantos activos:
+
+- `piezas_x_placa[].base` y `piezas_x_placa[].altura` conservaron las medidas nominales de entrada
+
+Implicancia:
+
+- la API actual podria descontar internamente y reportar nominal
+- o podria no descontar cuando `espesor = 0`
+- esta regla ya no debe tratarse como cerrada
+
+### 10.4 Unidad probable de `desp_tapacantos`
+
+En pruebas live se observo que la diferencia `ml - pegado` es compatible con aplicar `desp_tapacantos = 0.06` como una unidad muy pequena por lado, consistente con milimetros convertidos a metros.
+
+Hipotesis de trabajo recomendada:
+
+- no interpretar `desp_tapacantos` directamente como metros lineales
+- validar su unidad exacta con mas fixtures reales
+
+### 10.5 Estructura real de `planilla.tapacantos`
+
+Las pruebas live muestran dos comportamientos:
+
+- sin tapacantos de entrada: aparecen codigos genericos como `MEL`, `PVC`, `AUX`, `tr1` a `tr4`
+- con tapacantos de entrada: aparecen codigos reales y tambien posiciones `trN`
+
+Implicancia:
+
+- `planilla.tapacantos` debe modelarse como salida estructurada propia del sistema actual
+- no como simple reflejo del array de entrada
+
+### 10.6 Estado de `planilla_vid`
+
+`planilla_vid` ya no debe considerarse un campo solo contractual sin evidencia.
+
+La evidencia live confirma:
+
+- viene con contenido real
+- cambia segun el patron de corte
+- justifica una linea especifica de ingenieria inversa
