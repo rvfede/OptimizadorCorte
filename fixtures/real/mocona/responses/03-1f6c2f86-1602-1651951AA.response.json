@@ -1,0 +1,57 @@
+﻿{"planilla": {
+"cant_placas" : 1 ,
+"fracc_ultima_placa" : {
+"cant" : 0 ,
+"fraccion" : "Placa Entera" 
+},
+"cant_piezas_cortadas" : 12 ,
+"m2_utilizados" : 4.758 ,
+"m2_cortados" : 1.6605,
+"m2_sobrantes" : 3.0975,
+"m2_sobrantes_utilizables" : 2.93256 ,
+"ptje_aprov" : 34.8991 ,
+"cant_desp_sierra" : 24 ,
+"ml_desp_sierra" : 17.2324 ,
+"ml_bordes" : 17.72 ,
+"placas_usadas": [
+{"cant": 1 ,"base":     2600.0 ,"altura":     1830.0 ,"es_placa_entera": true,"stock_id": 0,"descri": "Placa Entera"}
+],
+"planos_corte": [
+{"cant": 1 ,"base":     2600.0 ,"altura":     1830.0 ,"es_placa_entera": true,"stock_id": 0,"descri": "Placa Entera","ptje_desp":      65.10,"desp_sierra": 24,"ml_sierra":      17.23,"m2_cortados":       1.66,"m2_util":       2.93,"piezas_x_placa": [
+{"nro_pedido": 2,"ref_pieza": "(3)" ,"cant": 1,"base": 600,"altura": 450,"detalle": "60X45" },
+{"nro_pedido": 1,"ref_pieza": "(2)" ,"cant": 2,"base": 500,"altura": 400,"detalle": "50X40" },
+{"nro_pedido": 0,"ref_pieza": "(1)" ,"cant": 7,"base": 400,"altura": 300,"detalle": "40X30" },
+{"nro_pedido": 3,"ref_pieza": "(4)" ,"cant": 1,"base": 350,"altura": 250,"detalle": "35X25" },
+{"nro_pedido": 4,"ref_pieza": "(5)" ,"cant": 1,"base": 300,"altura": 210,"detalle": "30X21" }
+],
+"cant_piezas": 12,
+"sobrantes_x_placa": [
+{"base":      300.0,"altura":      202.4 },
+{"base":     1526.8,"altura":     1820.0 },
+{"base":      450.0,"altura":      206.8 }]
+}
+
+],
+"tapacantos": [
+{"codigo": "MEL" ,"ml": 0 ,"pegado": 0},
+{"codigo": "PVC" ,"ml": 0 ,"pegado": 0},
+{"codigo": "AUX" ,"ml": 0 ,"pegado": 0},
+{"codigo": "tr1" ,"ml": 0 ,"pegado": 0},
+{"codigo": "tr2" ,"ml": 0 ,"pegado": 0},
+{"codigo": "tr3" ,"ml": 0 ,"pegado": 0},
+{"codigo": "tr4" ,"ml": 0 ,"pegado": 0}
+],
+"cant_sobrantes_utilizables" : 3 ,
+"sobrantes": [
+{"cant": 1 ,"base":      300.0 ,"altura":      202.4},
+{"cant": 1 ,"base":     1526.8 ,"altura":     1820.0},
+{"cant": 1 ,"base":      450.0 ,"altura":      206.8}
+],
+"url_planos": "https://optionline-dev-files.s3.amazonaws.com/plabf063b62cc730f41531fb6957294be4db4.pdf",
+"url_cnc": "https://optionline-dev-files.s3.amazonaws.com/plabf063b62cc730f41531fb6957294be4db4.saw",
+"url_aux_cnc": "https://optionline-dev-files.s3.amazonaws.com/plabf063b62cc730f41531fb6957294be4db4.PTX",
+"url_labels": "https://optionline-dev-files.s3.amazonaws.com/plabf063b62cc730f41531fb6957294be4db4_labels.pdf"
+},
+"planilla_vid": "15312;18244;0;0;10632;0;4544;6044;4500;6000;0;0;4544;5044;4000;5000;0;6044;4544;5044;4000;5000;0;11088;3044;4044;3000;4000;4544;0;3044;4044;3000;4000;4544;4044;3044;4044;3000;4000;4544;8088;3044;6112;3000;4000;4544;12132;3044;4044;3000;4000;7588;0;3044;4044;3000;4000;7588;4044;3044;4044;3000;4000;7588;8088;3044;3544;2500;3500;7588;12132;3044;2568;3000;2100;7588;15676;4544;2112;0;0;0;16132;-2;-3;25900;18200;1;18;0;1"
+}
+

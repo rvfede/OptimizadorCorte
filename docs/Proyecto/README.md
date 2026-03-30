@@ -61,6 +61,8 @@ Ver tambien:
 - `docs/Proyecto/08-fixtures-generales.md`
 - `docs/Proyecto/10-motor-optimizacion.md`
 - `docs/Proyecto/11-impacto-nueva-documentacion-2026-03-29.md`
+- `docs/Proyecto/12-ingenieria-inversa-planilla-vid.md`
+- `docs/Proyecto/13-semantica-tapacantos.md`
 - `docs/Proyecto/99-handoff-nueva-sesion.md`
 
 ## Proximo foco de trabajo

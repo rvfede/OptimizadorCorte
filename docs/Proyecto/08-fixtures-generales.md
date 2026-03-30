@@ -231,3 +231,20 @@ Ahora conviene:
 1. guardar requests y responses reales como fixtures versionados
 2. crear un documento especifico para ingenieria inversa de `planilla_vid`
 3. crear un documento especifico para semantica de tapacantos y unidades observadas
+
+## 11. Actualizacion 2026-03-30
+
+Ya se materializo una primera coleccion base de requests reales en:
+
+- `fixtures/real/mocona/requests/`
+
+Estado de esa coleccion:
+
+- incluye los 10 requests productivos observados en `OPTIMIZACIONES (1).txt`
+- usa naming `NN-uid-hora-archivo.json` porque `pedidos.archivo` no es unico
+- deja preparada la carpeta `fixtures/real/mocona/responses/` para incorporar responses reales equivalentes
+
+Documentacion asociada:
+
+- `fixtures/real/mocona/README.md`
+- `fixtures/real/mocona/notes/catalog.md`

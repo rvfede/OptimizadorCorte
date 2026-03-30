@@ -1,0 +1,51 @@
+﻿{"planilla": {
+"cant_placas" : 1 ,
+"fracc_ultima_placa" : {
+"cant" : 0 ,
+"fraccion" : "Placa Entera" 
+},
+"cant_piezas_cortadas" : 2 ,
+"m2_utilizados" : 5.0325 ,
+"m2_cortados" : 0.8,
+"m2_sobrantes" : 4.2325,
+"m2_sobrantes_utilizables" : 4.17122 ,
+"ptje_aprov" : 15.8967 ,
+"cant_desp_sierra" : 7 ,
+"ml_desp_sierra" : 10.8964 ,
+"ml_bordes" : 5.6 ,
+"placas_usadas": [
+{"cant": 1 ,"base":     2750.0 ,"altura":     1830.0 ,"es_placa_entera": true,"stock_id": 0,"descri": "Placa Entera"}
+],
+"planos_corte": [
+{"cant": 1 ,"base":     2750.0 ,"altura":     1830.0 ,"es_placa_entera": true,"stock_id": 0,"descri": "Placa Entera","ptje_desp":      84.10,"desp_sierra": 7,"ml_sierra":      10.90,"m2_cortados":       0.80,"m2_util":       4.17,"piezas_x_placa": [
+{"nro_pedido": 0,"ref_pieza": "(1)" ,"cant": 2,"base": 400,"altura": 1000,"detalle": "" }
+],
+"cant_piezas": 2,
+"sobrantes_x_placa": [
+{"base":      731.2,"altura":      400.0 },
+{"base":     2740.0,"altura":     1415.6 }]
+}
+
+],
+"tapacantos": [
+{"codigo": "9119799" ,"ml": 0.80012 ,"pegado": 0.8},
+{"codigo": "9117887" ,"ml": 0 ,"pegado": 0},
+{"codigo": "9122890" ,"ml": 0 ,"pegado": 0},
+{"codigo": "tr1" ,"ml": 0 ,"pegado": 0},
+{"codigo": "tr2" ,"ml": 0 ,"pegado": 0},
+{"codigo": "tr3" ,"ml": 0 ,"pegado": 0},
+{"codigo": "tr4" ,"ml": 0 ,"pegado": 0}
+],
+"cant_sobrantes_utilizables" : 2 ,
+"sobrantes": [
+{"cant": 1 ,"base":      731.2 ,"altura":      400.0},
+{"cant": 1 ,"base":     2740.0 ,"altura":     1415.6}
+],
+"url_planos": "https://optionline-dev-files.s3.amazonaws.com/plac0af6f752e303ceaa17097d79f297a1683.pdf",
+"url_cnc": "https://optionline-dev-files.s3.amazonaws.com/plac0af6f752e303ceaa17097d79f297a1683.saw",
+"url_aux_cnc": "https://optionline-dev-files.s3.amazonaws.com/plac0af6f752e303ceaa17097d79f297a1683.PTX",
+"url_labels": "https://optionline-dev-files.s3.amazonaws.com/plac0af6f752e303ceaa17097d79f297a1683_labels.pdf"
+},
+"planilla_vid": "27444;14200;0;0;0;4044;10044;4044;10000;4000;0;0;17400;4044;10000;4000;10044;0;-2;-3;27400;18200;1;3;0;0"
+}
+

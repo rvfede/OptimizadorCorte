@@ -1,0 +1,147 @@
+﻿{"planilla": {
+"cant_placas" : 6 ,
+"fracc_ultima_placa" : {
+"cant" : 0 ,
+"fraccion" : "Placa Entera" 
+},
+"cant_piezas_cortadas" : 78 ,
+"m2_utilizados" : 30.195 ,
+"m2_cortados" : 26.9674,
+"m2_sobrantes" : 3.22757,
+"m2_sobrantes_utilizables" : 1.66196 ,
+"ptje_aprov" : 89.3109 ,
+"cant_desp_sierra" : 170 ,
+"ml_desp_sierra" : 151.16 ,
+"ml_bordes" : 185.25 ,
+"placas_usadas": [
+{"cant": 6 ,"base":     2750.0 ,"altura":     1830.0 ,"es_placa_entera": true,"stock_id": 0,"descri": "Placa Entera"}
+],
+"planos_corte": [
+{"cant": 2 ,"base":     2750.0 ,"altura":     1830.0 ,"es_placa_entera": true,"stock_id": 0,"descri": "Placa Entera","ptje_desp":      12.94,"desp_sierra": 29,"ml_sierra":      26.08,"m2_cortados":       4.38,"m2_util":       0.35,"piezas_x_placa": [
+{"nro_pedido": 7,"ref_pieza": "(8)" ,"cant": 1,"base": 2480,"altura": 630,"detalle": "AG AH" },
+{"nro_pedido": 21,"ref_pieza": "(22)" ,"cant": 1,"base": 629,"altura": 728,"detalle": "91011" },
+{"nro_pedido": 13,"ref_pieza": "(14)" ,"cant": 1,"base": 715,"altura": 629,"detalle": "S" },
+{"nro_pedido": 1,"ref_pieza": "(2)" ,"cant": 2,"base": 712,"altura": 632,"detalle": "BCDE" },
+{"nro_pedido": 18,"ref_pieza": "(19)" ,"cant": 2,"base": 334,"altura": 728,"detalle": "123456" },
+{"nro_pedido": 29,"ref_pieza": "(30)" ,"cant": 1,"base": 653,"altura": 260,"detalle": "4AB" },
+{"nro_pedido": 25,"ref_pieza": "(26)" ,"cant": 1,"base": 600,"altura": 260,"detalle": "256CD" },
+{"nro_pedido": 38,"ref_pieza": "(39)" ,"cant": 1,"base": 653,"altura": 140,"detalle": "3u00b4AB" },
+{"nro_pedido": 34,"ref_pieza": "(35)" ,"cant": 1,"base": 600,"altura": 120,"detalle": "3CD" },
+{"nro_pedido": 31,"ref_pieza": "(32)" ,"cant": 1,"base": 300,"altura": 120,"detalle": "1CD" }
+],
+"cant_piezas": 24,
+"sobrantes_x_placa": [
+{"base":      120.0,"altura":      325.6 },
+{"base":     2740.0,"altura":      114.8 }]
+}
+,
+{"cant": 1 ,"base":     2750.0 ,"altura":     1830.0 ,"es_placa_entera": true,"stock_id": 0,"descri": "Placa Entera","ptje_desp":       9.88,"desp_sierra": 22,"ml_sierra":      22.84,"m2_cortados":       4.54,"m2_util":       0.32,"piezas_x_placa": [
+{"nro_pedido": 8,"ref_pieza": "(9)" ,"cant": 1,"base": 2480,"altura": 650,"detalle": "AI" },
+{"nro_pedido": 0,"ref_pieza": "(1)" ,"cant": 1,"base": 2199,"altura": 632,"detalle": "A" },
+{"nro_pedido": 24,"ref_pieza": "(25)" ,"cant": 1,"base": 1745,"altura": 120,"detalle": "17" },
+{"nro_pedido": 3,"ref_pieza": "(4)" ,"cant": 1,"base": 715,"altura": 250,"detalle": "G" },
+{"nro_pedido": 2,"ref_pieza": "(3)" ,"cant": 2,"base": 706,"altura": 250,"detalle": "FH" },
+{"nro_pedido": 26,"ref_pieza": "(27)" ,"cant": 1,"base": 644,"altura": 260,"detalle": "256AB" },
+{"nro_pedido": 25,"ref_pieza": "(26)" ,"cant": 3,"base": 600,"altura": 260,"detalle": "256CD" },
+{"nro_pedido": 35,"ref_pieza": "(36)" ,"cant": 2,"base": 653,"altura": 120,"detalle": "3AB" }
+],
+"cant_piezas": 12,
+"sobrantes_x_placa": [
+{"base":      120.0,"altura":      505.2 },
+{"base":      339.8,"altura":      250.0 },
+{"base":      276.6,"altura":      632.0 }]
+}
+,
+{"cant": 1 ,"base":     2750.0 ,"altura":     1830.0 ,"es_placa_entera": true,"stock_id": 0,"descri": "Placa Entera","ptje_desp":       5.04,"desp_sierra": 25,"ml_sierra":      22.37,"m2_cortados":       4.78,"m2_util":       0.07,"piezas_x_placa": [
+{"nro_pedido": 10,"ref_pieza": "(11)" ,"cant": 1,"base": 2199,"altura": 629,"detalle": "LM" },
+{"nro_pedido": 9,"ref_pieza": "(10)" ,"cant": 1,"base": 962,"altura": 617,"detalle": "AJ" },
+{"nro_pedido": 19,"ref_pieza": "(20)" ,"cant": 1,"base": 767,"altura": 610,"detalle": "7" },
+{"nro_pedido": 4,"ref_pieza": "(5)" ,"cant": 1,"base": 617,"altura": 630,"detalle": "I" },
+{"nro_pedido": 30,"ref_pieza": "(31)" ,"cant": 1,"base": 653,"altura": 564,"detalle": "4E" },
+{"nro_pedido": 36,"ref_pieza": "(37)" ,"cant": 1,"base": 653,"altura": 564,"detalle": "3E" },
+{"nro_pedido": 39,"ref_pieza": "(40)" ,"cant": 1,"base": 653,"altura": 560,"detalle": "3u00b4E" },
+{"nro_pedido": 27,"ref_pieza": "(28)" ,"cant": 1,"base": 644,"altura": 564,"detalle": "256E" },
+{"nro_pedido": 25,"ref_pieza": "(26)" ,"cant": 1,"base": 600,"altura": 260,"detalle": "256CD" },
+{"nro_pedido": 28,"ref_pieza": "(29)" ,"cant": 1,"base": 600,"altura": 260,"detalle": "4CD" },
+{"nro_pedido": 37,"ref_pieza": "(38)" ,"cant": 2,"base": 600,"altura": 140,"detalle": "3u00b4CD" }
+],
+"cant_piezas": 12,
+"sobrantes_x_placa": [
+{"base":      119.4,"altura":      564.0 }]
+}
+,
+{"cant": 1 ,"base":     2750.0 ,"altura":     1830.0 ,"es_placa_entera": true,"stock_id": 0,"descri": "Placa Entera","ptje_desp":       8.57,"desp_sierra": 31,"ml_sierra":      25.15,"m2_cortados":       4.60,"m2_util":       0.11,"piezas_x_placa": [
+{"nro_pedido": 21,"ref_pieza": "(22)" ,"cant": 1,"base": 629,"altura": 728,"detalle": "91011" },
+{"nro_pedido": 12,"ref_pieza": "(13)" ,"cant": 2,"base": 706,"altura": 629,"detalle": "RT" },
+{"nro_pedido": 15,"ref_pieza": "(16)" ,"cant": 2,"base": 697,"altura": 629,"detalle": "UV" },
+{"nro_pedido": 20,"ref_pieza": "(21)" ,"cant": 1,"base": 629,"altura": 610,"detalle": "8" },
+{"nro_pedido": 11,"ref_pieza": "(12)" ,"cant": 2,"base": 594,"altura": 629,"detalle": "NOPQ" },
+{"nro_pedido": 27,"ref_pieza": "(28)" ,"cant": 1,"base": 644,"altura": 564,"detalle": "256E" },
+{"nro_pedido": 18,"ref_pieza": "(19)" ,"cant": 1,"base": 334,"altura": 728,"detalle": "123456" },
+{"nro_pedido": 22,"ref_pieza": "(23)" ,"cant": 1,"base": 439,"altura": 489,"detalle": "12" },
+{"nro_pedido": 33,"ref_pieza": "(34)" ,"cant": 1,"base": 644,"altura": 282,"detalle": "1E" },
+{"nro_pedido": 26,"ref_pieza": "(27)" ,"cant": 1,"base": 644,"altura": 260,"detalle": "256AB" },
+{"nro_pedido": 32,"ref_pieza": "(33)" ,"cant": 1,"base": 644,"altura": 120,"detalle": "1A" }
+],
+"cant_piezas": 14,
+"sobrantes_x_placa": [
+{"base":      100.6,"altura":      439.0 },
+{"base":      594.0,"altura":      109.8 }]
+}
+,
+{"cant": 1 ,"base":     2750.0 ,"altura":     1830.0 ,"es_placa_entera": true,"stock_id": 0,"descri": "Placa Entera","ptje_desp":      14.77,"desp_sierra": 34,"ml_sierra":      28.65,"m2_cortados":       4.29,"m2_util":       0.46,"piezas_x_placa": [
+{"nro_pedido": 5,"ref_pieza": "(6)" ,"cant": 1,"base": 617,"altura": 612,"detalle": "Iu00b4" },
+{"nro_pedido": 6,"ref_pieza": "(7)" ,"cant": 2,"base": 617,"altura": 609,"detalle": "JK" },
+{"nro_pedido": 11,"ref_pieza": "(12)" ,"cant": 2,"base": 594,"altura": 629,"detalle": "NOPQ" },
+{"nro_pedido": 27,"ref_pieza": "(28)" ,"cant": 1,"base": 644,"altura": 564,"detalle": "256E" },
+{"nro_pedido": 14,"ref_pieza": "(15)" ,"cant": 1,"base": 477,"altura": 629,"detalle": "Z" },
+{"nro_pedido": 17,"ref_pieza": "(18)" ,"cant": 1,"base": 470,"altura": 629,"detalle": "W" },
+{"nro_pedido": 18,"ref_pieza": "(19)" ,"cant": 1,"base": 334,"altura": 728,"detalle": "123456" },
+{"nro_pedido": 23,"ref_pieza": "(24)" ,"cant": 1,"base": 286,"altura": 709,"detalle": "13" },
+{"nro_pedido": 16,"ref_pieza": "(17)" ,"cant": 1,"base": 290,"altura": 629,"detalle": "Y" },
+{"nro_pedido": 26,"ref_pieza": "(27)" ,"cant": 4,"base": 644,"altura": 260,"detalle": "256AB" },
+{"nro_pedido": 28,"ref_pieza": "(29)" ,"cant": 1,"base": 600,"altura": 260,"detalle": "4CD" }
+],
+"cant_piezas": 16,
+"sobrantes_x_placa": [
+{"base":      190.4,"altura":      260.0 },
+{"base":      629.0,"altura":      119.6 },
+{"base":      629.0,"altura":      112.6 },
+{"base":      191.4,"altura":      594.0 },
+{"base":      242.4,"altura":      612.0 }]
+}
+
+],
+"tapacantos": [
+{"codigo": "113074" ,"ml": 0 ,"pegado": 0},
+{"codigo": "9133923" ,"ml": 0 ,"pegado": 0},
+{"codigo": "9134826" ,"ml": 109.198 ,"pegado": 109.189},
+{"codigo": "9134827" ,"ml": 0 ,"pegado": 0},
+{"codigo": "13070" ,"ml": 0 ,"pegado": 0},
+{"codigo": "tr3" ,"ml": 0 ,"pegado": 0},
+{"codigo": "tr4" ,"ml": 0 ,"pegado": 0}
+],
+"cant_sobrantes_utilizables" : 15 ,
+"sobrantes": [
+{"cant": 2 ,"base":      120.0 ,"altura":      325.6},
+{"cant": 2 ,"base":     2740.0 ,"altura":      114.8},
+{"cant": 1 ,"base":      120.0 ,"altura":      505.2},
+{"cant": 1 ,"base":      339.8 ,"altura":      250.0},
+{"cant": 1 ,"base":      276.6 ,"altura":      632.0},
+{"cant": 1 ,"base":      119.4 ,"altura":      564.0},
+{"cant": 1 ,"base":      100.6 ,"altura":      439.0},
+{"cant": 1 ,"base":      594.0 ,"altura":      109.8},
+{"cant": 1 ,"base":      190.4 ,"altura":      260.0},
+{"cant": 1 ,"base":      629.0 ,"altura":      119.6},
+{"cant": 1 ,"base":      629.0 ,"altura":      112.6},
+{"cant": 1 ,"base":      191.4 ,"altura":      594.0},
+{"cant": 1 ,"base":      242.4 ,"altura":      612.0}
+],
+"url_planos": "https://optionline-dev-files.s3.amazonaws.com/plac085972acf7d5ae519f804c9d3d837f2c4.pdf",
+"url_cnc": "https://optionline-dev-files.s3.amazonaws.com/plac085972acf7d5ae519f804c9d3d837f2c4.saw",
+"url_aux_cnc": "https://optionline-dev-files.s3.amazonaws.com/plac085972acf7d5ae519f804c9d3d837f2c4.PTX",
+"url_labels": "https://optionline-dev-files.s3.amazonaws.com/plac085972acf7d5ae519f804c9d3d837f2c4_labels.pdf"
+},
+"planilla_vid": "27444;1192;0;0;0;17052;24844;6344;24800;6300;0;0;6334;7324;6290;7280;0;6344;6334;7324;6290;7150;6334;6344;6364;7324;6320;7120;12668;6344;6364;7324;6320;7120;19032;6344;7324;3384;7280;3340;0;13668;7324;3384;7280;3340;7324;13668;6574;3384;6530;2600;14648;13668;6044;3384;6000;2600;21222;13668;1444;7324;1400;6530;25396;6344;1244;6344;1200;6000;24844;0;1244;6344;1200;3000;26088;0;112;6344;0;0;27332;0;604;7324;0;0;26840;6344;178;3384;0;0;27266;13668;-2;112;18244;0;0;27332;0;24844;6544;24800;6500;0;0;24844;6364;21990;6320;0;6544;1244;18244;1200;17450;24844;0;7194;2544;7150;2500;0;12908;24844;148;0;0;0;18096;7104;2544;7060;2500;7194;12908;10546;2544;7060;2500;14298;12908;6484;2644;6440;2600;0;15452;6044;2644;6000;2600;6484;15452;6044;2644;6000;2600;12528;15452;6272;2644;6000;2600;18572;15452;1244;6574;1200;6530;26088;0;1244;11670;1200;6530;26088;6574;-2;27444;12;0;0;0;18232;22034;6334;21990;6290;0;0;9664;6214;9620;6170;0;6334;7714;6214;7670;6100;9664;6334;6344;6214;6300;6170;17378;6334;6574;5684;6530;5640;0;12548;6574;5684;6530;5640;6574;12548;6574;5684;6530;5600;13148;12548;7722;5684;6440;5640;19722;12548;2644;6334;2600;6000;22034;0;2644;6334;2600;6000;24678;0;1444;6214;1400;6000;23722;6334;1444;6214;1400;6000;25166;6334;834;6214;0;0;26610;6334;122;6334;0;0;27322;0;-2;18;18244;0;0;27426;0;7324;6334;7280;6290;0;0;7324;6334;7060;6290;0;6334;7104;6334;7060;6290;7324;0;7104;6334;6970;6290;7324;6334;7014;6334;6970;6290;14428;0;7014;6144;6290;6100;14428;6334;5984;6334;5940;6290;21442;0;5984;6334;5940;6290;21442;6334;7014;5684;6440;5640;14428;12478;7324;3384;7280;3340;0;12668;5984;4434;4890;4390;21442;12668;7104;2864;6440;2820;7324;12668;7104;2644;6440;2600;7324;15532;7324;1244;6440;1200;0;16052;7324;948;0;0;0;17296;7104;68;0;0;7324;18176;5984;1142;0;0;21442;17102;7014;82;0;0;14428;18162;-2;27444;68;0;0;0;18176;6214;6164;6170;6120;0;0;6214;6164;6170;6090;6214;0;6214;6164;6170;6090;12428;0;6334;6164;6290;5940;18642;0;6334;5984;6290;5940;0;6164;6484;5984;6440;5640;6334;6164;6334;5984;6290;4770;12818;6164;6334;5984;6290;4700;19152;6164;7324;3384;7280;3340;0;12148;7134;3384;7090;2860;7324;12148;6334;3384;6290;2900;14458;12148;6484;3384;6440;2600;20792;12148;6484;2644;6440;2600;0;15532;6484;2644;6440;2600;6484;15532;6484;2644;6440;2600;12968;15532;7992;2644;6000;2600;19452;15532;168;3384;0;0;27276;12148;1958;5984;0;0;25486;6164;2468;6164;0;0;24976;0;-2;-3;27400;18200;2;23;0;0;27400;18200;1;18;0;1;27400;18200;1;19;0;0;27400;18200;1;25;0;1;27400;18200;1;27;0;0"
+}
+

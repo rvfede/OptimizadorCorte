@@ -1,141 +1,168 @@
-# Handoff Para Nueva Sesion
+ï»¿# Handoff Para Nueva Sesion
 
 ## Objetivo
 
-Este documento sirve como punto de arranque para continuar el trabajo en una nueva sesion sin perder el contexto del proyecto.
+Este documento sirve como punto de arranque para continuar el trabajo en una nueva sesion sin perder el contexto real del proyecto al `2026-03-30`.
 
 ## Prompt recomendado
 
 ```text
 Estamos trabajando en `C:\REPOS\OptimizadorCorte`.
 
-Quiero continuar la documentacion y diseño de una API de optimizacion de corte que debe reemplazar una API existente, manteniendo compatibilidad funcional y estructural.
+Quiero continuar la documentacion y diseÃ±o de una API de optimizacion de corte que debe reemplazar una API existente, manteniendo compatibilidad funcional y estructural.
 
 Antes de proponer nada, revisa estos documentos del repo:
 
 - `docs/Proyecto/README.md`
-- `docs/Proyecto/00-glosario.md`
 - `docs/Proyecto/02-contrato-api.md`
 - `docs/Proyecto/03-reglas-de-optimizacion.md`
 - `docs/Proyecto/06-decisiones-tecnicas.md`
 - `docs/Proyecto/08-fixtures-generales.md`
 - `docs/Proyecto/10-motor-optimizacion.md`
-- `docs/Proyecto/11-impacto-nueva-documentacion-2026-03-29.md`
+- `docs/Proyecto/12-ingenieria-inversa-planilla-vid.md`
+- `docs/Proyecto/13-semantica-tapacantos.md`
+- `fixtures/real/mocona/notes/live-captures-2026-03-30.md`
+- `fixtures/real/mocona/notes/planilla-vid-comparison.md`
+- `fixtures/real/mocona/notes/request-response-tapacantos-comparison.md`
 - `docs/Proyecto/99-handoff-nueva-sesion.md`
 
 Contexto importante:
 
 - hoy hay 1 unico sistema integrador y 4 empresas cliente
-- se capturo evidencia real nueva del tenant `mocona`
-- ya se probaron requests reales contra `http://apidev.optimizadoronline.com/optimizar2`
-- se confirmo que el response real devuelve `planilla`, `planilla_vid` y URLs de artefactos
-- `planilla_vid` ya no debe tratarse como campo sin evidencia real
-- `pedidos.cliente` se observa como identificador del tenant o empresa cliente, no como cliente final comercial
-- hay incertidumbre abierta sobre semantica real de tapacantos, unidades y descuentos de dimensiones
+- el repo sigue sin codigo de aplicacion; hoy es principalmente documental y de fixtures
+- ya se materializaron 10 requests reales de `mocona`
+- ya se capturaron 3 responses reales del endpoint developer
+- `planilla_vid` es campo de output, no de input
+- `pedidos.cliente` se observa como identificador del tenant o empresa cliente
+- el mayor riesgo de compatibilidad fina sigue siendo `planilla_vid`, y eso solo seria bloqueo serio si el integrador lo usa activamente
 
-Despues de leer eso, quiero que continúes con: [ACA PONES LA TAREA]
+Despues de leer eso, quiero que continÃºes con: [ACA PONES LA TAREA]
 ```
 
-## Decisiones tomadas que siguen vigentes
+## Estado actual resumido
 
-- el algoritmo de optimizacion es guillotina implementado en casa, sin libreria externa
-- los resultados deben ser funcionalmente optimos, no bit-a-bit identicos al sistema anterior
-- la arquitectura objetivo sigue siendo `async-first`
-- sync debe tratarse como adaptador de compatibilidad, no como base del diseño
-- infra objetivo: Google Cloud Run + Supabase Postgres + Supabase Storage + GitHub Actions + Docker
+### Lo que ya esta suficientemente claro para desarrollar
 
-## Evidencia nueva incorporada en esta sesion
+- contrato base de request y response
+- arquitectura objetivo `async-first`
+- decision de motor guillotina propio
+- actor model del negocio: empresa cliente, sistema integrador, tenant
+- coleccion inicial de fixtures reales para pruebas de compatibilidad
 
-Se analizo nueva documentacion en:
+### Lo que no esta cerrado al 100%
 
-- `docs/LEPTON API/Nueva Doc 29-3/api_test.md`
-- `docs/LEPTON API/Nueva Doc 29-3/OPTIMIZACIONES.txt`
-- `docs/LEPTON API/Nueva Doc 29-3/OPTIMIZACIONES (1).txt`
+- serializacion completa token por token de `planilla_vid`
+- semantica final de `tapacantos`
+- si el motor descuenta internamente medidas pero serializa dimensiones nominales
+- formula exacta de algunos campos resumen como `ml_bordes`
 
-Se confirmo evidencia operacional:
+### Evaluacion de riesgo
 
-- endpoint developer: `http://apidev.optimizadoronline.com/optimizar2`
-- endpoint production: `https://apilepton.optimizadoronline.com/optimizar2`
-- header observado: `X-User-Id: mocona`
+- el proyecto no esta en riesgo existencial
+- el riesgo principal es de paridad fina, no de viabilidad general
+- el unico candidato real a bloqueo fuerte es `planilla_vid` si el integrador depende de ese campo para dibujar o interpretar planos
 
-Se capturaron responses reales del endpoint developer con al menos 3 casos.
+## Evidencia nueva ya materializada
 
-## Hallazgos clave que cambian el estado del proyecto
+### Fixtures reales versionados
 
-### 1. `planilla_vid` ya tiene evidencia real
+Requests reales:
 
-Se obtuvieron responses reales con `planilla_vid` no vacio.
+- `fixtures/real/mocona/requests/`
 
-Implicancia:
+Responses reales:
 
-- ya conviene atacar ingenieria inversa del formato
-- deja de ser correcto asumirlo solo como placeholder vacio de referencia
+- `fixtures/real/mocona/responses/03-1f6c2f86-1602-1651951AA.response.json`
+- `fixtures/real/mocona/responses/04-12356d43-1554-1651692AA.response.json`
+- `fixtures/real/mocona/responses/live-1651862AA.response.json`
 
-### 2. `pedidos.cliente` no debe seguir leyendose como cliente final por defecto
+Notas de analisis:
 
-En la evidencia real observada:
+- `fixtures/real/mocona/notes/live-captures-2026-03-30.md`
+- `fixtures/real/mocona/notes/planilla-vid-comparison.md`
+- `fixtures/real/mocona/notes/request-response-tapacantos-comparison.md`
 
-- `pedidos.cliente = mocona`
+## Hallazgos clave vigentes
 
-Implicancia:
+### 1. `planilla_vid`
 
-- se comporta como identificador del tenant o empresa cliente
-- el glosario y documentos de contrato ya fueron corregidos en ese sentido
+Se confirmo con evidencia versionada que:
 
-### 3. El response real refuerza varias hipotesis y corrige otras
+- siempre llega en output cuando el caso fue exitoso
+- no viene vacio en los 3 responses reales capturados
+- tiene cuerpo geometrico variable
+- usa `-2` como separador por `plano_corte`
+- usa `-3` antes de una tabla final compacta
+- la tabla final usa `6` tokens por cada `plano_corte`
+- la placa util aparece en decimas de milimetro
 
-Se confirmo:
+Lo que sigue abierto:
 
-- estructura raiz `planilla` + `planilla_vid`
-- URLs reales para `url_planos`, `url_labels`, `url_cnc`, `url_aux_cnc`
-- `planilla.tapacantos` con estructura propia, no espejo directo del request
+- significado exacto de los 4 valores variables del bloque final
+- semantica completa del cuerpo geometrico
 
-Se detecto tension abierta en:
+### 2. `tapacantos`
 
-- semantica de `tapacantos[].espesor`
-- unidad de `desp_tapacantos`
-- criterio exacto de descuento de dimensiones por canto
-- criterio exacto de `m2_utilizados`, que parece usar placa nominal
+Se confirmo con evidencia versionada que:
 
-## Documentos actualizados en esta sesion
+- `tapacantos[]` en request no contiene solo cantos fisicos; tambien aparecen tablero, corte, etiquetado y pegado
+- en trafico real de `mocona`, `espesor = 0` incluso cuando la descripcion textual indica espesores no nulos
+- `planilla.tapacantos` no es espejo directo del request
+- en `1651862AA`, con `aba1`, solo `9119799` consume y devuelve `ml = 0.80012`, `pegado = 0.8`
+- en `1651692AA`, con activacion fuerte de `arr3/aba3/der3/izq3`, solo `9134826` devuelve consumo relevante
+- los responses versionados siguen favoreciendo que `piezas_x_placa` serializa medidas nominales
 
-- `docs/Proyecto/00-glosario.md`
-- `docs/Proyecto/02-contrato-api.md`
-- `docs/Proyecto/03-reglas-de-optimizacion.md`
-- `docs/Proyecto/06-decisiones-tecnicas.md`
+### 3. Metricas y artefactos
+
+Se confirmo que los responses reales devuelven:
+
+- `planilla`
+- `planilla_vid`
+- `fracc_ultima_placa`
+- `url_planos`
+- `url_labels`
+- `url_cnc`
+- `url_aux_cnc`
+
+## Documentos clave actualizados
+
 - `docs/Proyecto/08-fixtures-generales.md`
-- `docs/Proyecto/10-motor-optimizacion.md`
-- `docs/Proyecto/11-impacto-nueva-documentacion-2026-03-29.md`
+- `docs/Proyecto/12-ingenieria-inversa-planilla-vid.md`
+- `docs/Proyecto/13-semantica-tapacantos.md`
 - `docs/Proyecto/99-handoff-nueva-sesion.md`
 
 ## Siguiente foco recomendado
 
-El siguiente paso mas valioso ya no es infraestructura.
+Hoy hay dos caminos razonables, segun la intencion de la proxima sesion.
 
-El siguiente foco recomendado es cerrar la ingenieria inversa funcional con evidencia real.
+### Opcion A. Cerrar un poco mas la ingenieria inversa
+
+Elegir esta opcion si el objetivo es reducir mas riesgo antes de programar.
 
 Orden recomendado:
 
-1. materializar fixtures reales request/response en el repo
-2. crear `docs/Proyecto/12-ingenieria-inversa-planilla-vid.md`
-3. crear `docs/Proyecto/13-semantica-tapacantos.md`
-4. revisar `05-casos-de-prueba.md` a la luz de evidencia live
-5. luego recien bajar esa informacion al skeleton `.NET`
+1. capturar mas responses reales pequenos con indices de canto distintos de `1` y `3`
+2. seguir comparando tokenizacion de `planilla_vid` entre casos
+3. intentar identificar la semantica de los 4 valores variables del bloque final de `6` tokens
+4. anexar tablas comparativas adicionales a los docs `12` y `13`
 
-## Tareas concretas que pueden hacerse en la proxima sesion
+### Opcion B. Empezar a desarrollar ya
 
-- guardar como fixtures los 3 casos ya probados contra developer
-- correr mas requests reales del set `mocona` y capturar responses
-- comparar respuestas entre casos con y sin tapacantos
-- empezar a descomponer `planilla_vid` en tokens y correlacionarlo con `planos_corte`
-- documentar hipotesis verificables sobre `m2_utilizados`, `ml_bordes`, `cant_desp_sierra` y `tapacantos`
-- si se prefiere avanzar en implementacion, proponer estructura inicial del proyecto `.NET` basada ya en evidencia real de entrada y salida
+Elegir esta opcion si el objetivo es ganar velocidad de implementacion sin esperar cierre total de la ingenieria inversa.
+
+Orden recomendado:
+
+1. crear skeleton `.NET 8` de la API
+2. modelar request/response exactos del contrato
+3. montar tests de compatibilidad sobre `fixtures/real/mocona/requests` y `fixtures/real/mocona/responses`
+4. dejar `planilla_vid` y serializer de `tapacantos` como capas desacopladas y explicitamente pendientes de cierre total
+5. implementar el pipeline de jobs y el parser antes del motor final
 
 ## Nota operativa
 
-La estrategia recomendada para continuar ahora es:
+La estrategia correcta para continuar es:
 
-- leer primero la documentacion actualizada
-- usar evidencia real antes que inferencias viejas cuando entren en conflicto
-- preservar el contrato observado aunque internamente se modele mejor
-- separar siempre: comportamiento observado, hipotesis de trabajo y decisiones de implementacion propias
+- usar siempre evidencia versionada antes que memoria de sesion
+- separar comportamiento observado de hipotesis de trabajo
+- no tratar como bloqueante todo lo que aun no tiene semantica fina cerrada
+- asumir que ya hay base suficiente para empezar a desarrollar si se acepta un enfoque por capas
